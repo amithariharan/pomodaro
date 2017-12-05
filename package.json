@@ -1,0 +1,17 @@
+{
+  "name": "pomodaro",
+  "version": "1.0.0",
+  "description": "An online pomodaro clock",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js",
+    "startdev": "webpack-dev-server"
+  },
+  "author": "Amith",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.9.1",
+    "webpack-dev-server": "^2.9.5"
+  }
+}
