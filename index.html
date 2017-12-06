@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#2efefe">
     <script defer type="text/javascript" src="bundle.js" ></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+    
     <title>Pomodaro Clock</title>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+
+    <header>
+      Pomodoro Timer
+    </header>
+
     <div class="pomodaro">
-      
+      <div class="tomoto-top">
+      </div>  
       <span class="ruler">
         <div class="reading-wrapper">
           <div class="reading">
@@ -146,29 +155,113 @@
     </div>
 
    <div class="controlls">
-     <button id="increment">+</button>
+     <button id="increment"><i class="material-icons md-18">add</i></button>
      <input type="number" value="25" id="time"/>
-     <button id="decrement">-</button>
+     <button id="decrement"><i class="material-icons md-18">remove</i></button>
      <audio id="tick" loop="true" src="/sounds/ticking.mp3"></audio>
      <audio id="alarm" src="/sounds/alarm.mp3"></audio>
-     <button onclick="startTimer()">Start</button>
+     <button onclick="startTimer()"><i class="material-icons md-18">play_arrow</i></button>
    </div>
 
     <style>
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #FFE4C5;
+        font-family: 'Alex Brush', cursive;
+      }
+
+      header {
+        min-height: 100px;
+        background-color: #123b39;
+        color: #FFE4C5;
+        font-size: 48px;
+        line-height: 100px;
+        text-align: center;
+      }
+
+      @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+        src: local('Material Icons'),
+          local('MaterialIcons-Regular'),
+          url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+          url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+          url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+      }
+
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  /* Preferred icon size */
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+      }
 
       .pomodaro {
         width: 200px;
         height: 200px;
         background-color: #b70a0a;
+        background: radial-gradient(circle at 40px 80px, #f55225, #540000);
         border-radius: 45%;
-        box-shadow: 2px -6px 10px 6px #980f27 inset;
         overflow: hidden;
-        margin: 0 auto;
+        margin: 16px auto;
       }
+
+      .pomodaro::before {
+        content: "";
+        position: absolute;
+        top: 107px;
+        left: 46%;
+        width: 30px;
+        height: 5px;
+        border: 8px solid green;
+        border-width: 0 2px 6px 2px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        animation: rotates ease-in 60s infinite;
+      }
+
+      .pomodaro::after {
+          content: "";
+          position: absolute;
+          width: 5px;
+          height: 30px;
+          border: 5px solid green;
+          border-width: 3px 0 0 6px;
+          border-top-left-radius: 20px;
+          animation: rotates ease-in 60s infinite;
+          top:83px;
+          left: 50%;
+          transform: scale3DZ(3)
+      }
+
 
 
       .controlls {
         padding: 20px;
+        margin: 0 auto;
+        text-align: center;
       }
 
       #time {
@@ -191,6 +284,7 @@
       input {
         text-align: center;
         border: none;
+        background-color: #FFE4C5;
       }
 
       button:active {
@@ -210,15 +304,15 @@
       }
 
       .reading {
-       width: 600px;
-       position: relative;
-       display: inline-block;
-       
-       font-size: 0;
+        width: 600px;
+        position: relative;
+        display: inline-block;
+
+        font-size: 0;
       }
 
       .animation-move {
-        animation: move linear 60s 1;
+        animation: move linear 60s infinite;
       }
 
       .reading-wrapper {
@@ -253,6 +347,33 @@
         margin-left: 90px;
       }
 
+      .tomoto-top {
+        position: relative;
+        
+      }
+
+      .tomoto {
+        position: absolute;
+        min-width: 10px;
+        min-height: 50px;
+        background-color: green;
+        border-radius: 50%;
+      }
+
+      .tomoto-1 {
+        animation: rotate ease-in 60s infinite;
+        transform-origin: top left;
+        left: 50%;
+      }
+      .tomoto-2 {
+        transform: rotate(120deg);
+        left: 120px;
+      }
+
+      .tomoto-3 {
+        transform: rotate(120deg)
+      }
+
       @keyframes move {
         from {
           left: 0px;
@@ -261,6 +382,29 @@
           left: -600px
         }
       }
+
+      @keyframes rotates {
+        from {
+          transform: rotateY(0deg)
+        } to {
+          transform: rotateY(360deg)
+        }
+
+
+        /* 0% {
+          left: 60%;
+          transform: rotate(302deg);
+        }
+        50% {
+          left: 50%;
+          transform: rotate(360deg);
+        }
+        100% {
+          left: 35%;
+          transform: rotate(417deg);
+        } */
+      }
+
     </style>
 
   </body>
